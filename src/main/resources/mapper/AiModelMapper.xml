@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.AiModelMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.AiModel">
+            <id property="id" column="id" />
+            <result property="userId" column="user_id" />
+            <result property="providerId" column="provider_id" />
+            <result property="modelName" column="model_name" />
+            <result property="modelDisplayName" column="model_display_name" />
+            <result property="modelType" column="model_type" />
+            <result property="contextWindow" column="context_window" />
+            <result property="maxTokens" column="max_tokens" />
+            <result property="inputCostPer1k" column="input_cost_per_1k" />
+            <result property="outputCostPer1k" column="output_cost_per_1k" />
+            <result property="currencyType" column="currency_type" />
+            <result property="isActive" column="is_active" />
+            <result property="isDelete" column="is_delete" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,provider_id,model_name,model_display_name,model_type,
+        context_window,max_tokens,input_cost_per_1k,output_cost_per_1k,currency_type,
+        is_active,is_delete,created_at,updated_at
+    </sql>
+</mapper>

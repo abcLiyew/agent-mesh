@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.AgentToolRelationMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.AgentToolRelation">
+            <id property="id" column="id" />
+            <result property="agentId" column="agent_id" />
+            <result property="toolType" column="tool_type" />
+            <result property="toolRefId" column="tool_ref_id" />
+            <result property="configParams" column="config_params" />
+            <result property="sortOrder" column="sort_order" />
+            <result property="isDelete" column="is_delete" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,agent_id,tool_type,tool_ref_id,config_params,sort_order,
+        is_delete
+    </sql>
+</mapper>

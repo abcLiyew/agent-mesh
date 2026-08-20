@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.User">
+            <id property="id" column="id" />
+            <result property="username" column="username" />
+            <result property="passwordHash" column="password_hash" />
+            <result property="email" column="email" />
+            <result property="userRole" column="user_role" />
+            <result property="experienceLevel" column="experience_level" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+            <result property="isDelete" column="is_delete" />
+            <result property="memberExpireAt" column="member_expire_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,username,password_hash,email,user_role,experience_level,
+        created_at,updated_at,is_delete,member_expire_at
+    </sql>
+</mapper>

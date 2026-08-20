@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.McpServersMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.McpServers">
+            <id property="id" column="id" />
+            <result property="ownerId" column="owner_id" />
+            <result property="serverName" column="server_name" />
+            <result property="transportType" column="transport_type" />
+            <result property="endpointUrl" column="endpoint_url" />
+            <result property="commandArgs" column="command_args" />
+            <result property="authConfigEncrypted" column="auth_config_encrypted" />
+            <result property="envVarsEncrypted" column="env_vars_encrypted" />
+            <result property="status" column="status" />
+            <result property="lastHeartbeat" column="last_heartbeat" />
+            <result property="isDelete" column="is_delete" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,owner_id,server_name,transport_type,endpoint_url,command_args,
+        auth_config_encrypted,env_vars_encrypted,status,last_heartbeat,is_delete,
+        created_at,updated_at
+    </sql>
+</mapper>

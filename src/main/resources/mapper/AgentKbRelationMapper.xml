@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.AgentKbRelationMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.AgentKbRelation">
+        <id property="id" column="id" />
+        <result property="agentId" column="agent_id" />
+        <result property="kbId" column="kb_id" />
+        <result property="searchTopK" column="search_top_k" />
+        <result property="similarityThreshold" column="similarity_threshold" />
+        <result property="sortOrder" column="sort_order" />
+        <result property="isDelete" column="is_delete" />
+        <result property="createdAt" column="created_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,agent_id,kb_id,search_top_k,similarity_threshold,sort_order,
+        is_delete,created_at
+    </sql>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.AgentMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.Agent">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="system_prompt" property="systemPrompt"/>
+        <result column="role_definition" property="roleDefinition"/>
+        <result column="decision_model_id" property="decisionModelId"/>
+        <result column="response_model_id" property="responseModelId"/>
+        <result column="is_tool_enabled" property="isToolEnabled"/>
+        <result column="tool_schema_json" property="toolSchemaJson"
+                typeHandler= "com.esdllm.agentmesh.config.PostgreSqlJsonbTypeHandler"/>
+        <result column="tool_description" property="toolDescription"/>
+        <result column="version" property="version"/>
+        <result column="status" property="status"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="is_delete" property="isDelete"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, name, description, avatar_url, system_prompt, role_definition,
+        decision_model_id, response_model_id, is_tool_enabled, tool_schema_json,
+        tool_description, version, status, created_at, updated_at, is_delete
+    </sql>
+
+</mapper>

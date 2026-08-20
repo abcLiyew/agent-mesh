@@ -1,0 +1,10 @@
+spring:
+  ai:
+    vectorstore:
+      pgvector:
+        vectorTableName: vector_store #表名
+        initialize-schema: false #是否初始化表
+        index-type: hnsw #索引类型
+        dimensions-type: dimensions_openai #向量维度
+        distance-type: cosine_distance #距离类型
+        max-document-batch-size: 1000 #最大文档批次大小

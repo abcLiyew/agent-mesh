@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.KnowledgeBaseDocumentMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.KnowledgeBaseDocument">
+        <id property="id" column="id" />
+        <result property="kbId" column="kb_id" />
+        <result property="docName" column="doc_name" />
+        <result property="docType" column="doc_type" />
+        <result property="sourceUrl" column="source_url" />
+        <result property="contentHash" column="content_hash" />
+        <result property="chunkCount" column="chunk_count" />
+        <result property="vectorIds" column="vector_ids" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="metadataJson" column="metadata_json" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="relatedToolIds" column="related_tool_ids" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="status" column="status" />
+        <result property="isDelete" column="is_delete" />
+        <result property="createdAt" column="created_at" />
+        <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,kb_id,doc_name,doc_type,source_url,content_hash,chunk_count,
+        vector_ids,metadata_json,related_tool_ids,status,is_delete,created_at,updated_at
+    </sql>
+</mapper>

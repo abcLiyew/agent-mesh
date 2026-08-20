@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.ConversationLogMapper">
+
+    <!-- 查询热门意图类型 -->
+    <select id="getTopIntentTypes" resultType="com.esdllm.agentmesh.model.dto.IntentStatistics">
+        SELECT
+            intent_type as intentType,
+            COUNT(*) as count,
+            AVG(intent_confidence) as averageConfidence
+        FROM conversation_log
+        WHERE agent_id = #{agentId}
+          AND intent_type IS NOT NULL
+        GROUP BY intent_type
+        ORDER BY count DESC
+        LIMIT #{limit}
+    </select>
+
+
+    <!-- 查询常用工具（使用 PostgreSQL 的 jsonb 函数） -->
+    <select id="getTopUsedToolsRaw" resultType="java.util.Map">
+        SELECT
+            CAST(elem.tool_element AS bigint) as tool_id,
+            t.display_name as tool_name,
+            COUNT(*) as usage_count,
+            AVG(cl.execution_time_ms) as avg_duration
+        FROM conversation_log cl
+                 CROSS JOIN LATERAL jsonb_array_elements_text(cl.invoked_tool_ids) AS elem(tool_element)
+        LEFT JOIN tools t ON CAST(elem.tool_element AS bigint) = t.id
+        WHERE cl.agent_id = #{agentId}
+          AND cl.invoked_tool_ids IS NOT NULL
+          AND jsonb_array_length(cl.invoked_tool_ids) > 0
+        GROUP BY elem.tool_element, t.display_name
+        ORDER BY usage_count DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 查询常用工具（转换为 ToolUsageStatistics） -->
+    <select id="getTopUsedTools" resultType="com.esdllm.agentmesh.model.dto.ToolUsageStatistics">
+        SELECT
+            CAST(elem.tool_element AS bigint) as toolId,
+            t.display_name as toolName,
+            COUNT(*) as count,
+            AVG(cl.execution_time_ms) as averageDurationMs
+        FROM conversation_log cl
+                 CROSS JOIN LATERAL jsonb_array_elements_text(cl.invoked_tool_ids) AS elem(tool_element)
+        LEFT JOIN tools t ON CAST(elem.tool_element AS bigint) = t.id
+        WHERE cl.agent_id = #{agentId}
+          AND cl.invoked_tool_ids IS NOT NULL
+          AND jsonb_array_length(cl.invoked_tool_ids) > 0
+        GROUP BY elem.tool_element, t.display_name
+        ORDER BY count DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 查询低分反馈记录 -->
+    <select id="getLowRatingFeedbacks" resultType="com.esdllm.agentmesh.model.domain.ConversationLog">
+        SELECT
+            id,
+            user_id,
+            agent_id,
+            session_id,
+            user_query,
+            final_response,
+            intent_type,
+            intent_confidence,
+            decision_path,
+            invoked_tool_ids,
+            searched_kb_ids,
+            decision_model_id,
+            response_model_id,
+            total_input_tokens,
+            total_output_tokens,
+            total_cost,
+            execution_time_ms,
+            status,
+            error_message,
+            user_rating,
+            user_feedback,
+            created_at
+        FROM conversation_log
+        WHERE agent_id = #{agentId}
+          AND user_rating IS NOT NULL
+          AND user_rating <![CDATA[ <= ]]> 2
+        ORDER BY created_at DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 统计活跃会话数（最近指定天数内的不同会话数） -->
+    <select id="countActiveSessions" resultType="java.lang.Long">
+        SELECT COUNT(DISTINCT session_id) as activeSessions
+        FROM conversation_log
+        WHERE user_id = #{userId}
+          AND created_at >= NOW() - INTERVAL '1 day' * #{days}
+    </select>
+
+</mapper>

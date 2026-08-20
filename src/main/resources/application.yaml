@@ -1,0 +1,129 @@
+spring:
+  application:
+    name: agent-mesh
+  profiles:
+    active: local,dev
+  autoconfigure:
+    exclude:
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioSpeechAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioTranscriptionAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiChatAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiEmbeddingAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiImageAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiModerationAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeAgentAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeAudioSpeechAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeAudioTranscriptionAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeChatAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeEmbeddingAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeImageAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeRerankAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeVideoAutoConfiguration
+  servlet:
+    multipart:
+          enabled: true
+          max-file-size: 50MB
+          max-request-size: 100MB
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: ${MAIL_USERNAME:your-qq-mail@qq.com}
+    password: ${MAIL_PASSWORD:your-mail-password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        starttls:
+          enable: true
+  ai:
+    ollama:
+          base-url: http://localhost:11434
+
+
+server:
+  port: 8080
+  reactive:
+    session:
+      timeout: 7d
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.esdllm.agentmesh.controller
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+  basic:
+    password: ${KNIFE4J_PASSWORD:your-knife4j-password}
+    username: esdllm
+    enable: true
+
+#mybatis-plus 配置
+mybatis-plus:
+  type-aliases-package: com.esdllm.usercenter.model
+  global-config:
+    db-config:
+      logic-delete-field: isDelete  #全局逻辑删除
+      logic-delete-value: 1 # 逻辑已删除值
+      logic-not-delete-value: 0 # 逻辑未删除值
+      table-prefix:  # 设置表的前缀
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰命名
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 应用配置
+app:
+  name: agent-mesh
+  version: 1.0.0
+
+# RAG 配置
+rag:
+  # 工具匹配阶段的相似度阈值（0.0-1.0）
+  tool-matching-threshold: 0.5
+  # 最终回答阶段的相似度阈值（0.0-1.0）
+  response-threshold: 0.6
+  # 工具匹配阶段返回的最大结果数
+  tool-matching-top-k: 3
+  # 最终回答阶段返回的最大结果数
+  response-top-k: 5
+  # RAG 增强的最低得分阈值
+  min-score-threshold: 0.5
+  # 是否启用 RAG 工具推荐
+  enable-tool-recommendation: true
+
+# 在 application-dev.yaml 中禁用自动配置
+# 文件上传配置
+file:
+  upload:
+    upload-dir: ./uploads
+    max-file-size: 52428800  # 50MB
+    allowed-extensions: txt,pdf,doc,docx,xls,xlsx,md,markdown,csv,json
+# application.yml
+agent-mesh:
+  executor:
+    tool-timeout-ms: 30000
+    max-recursion-depth: 5
+    thread-pool:
+      core-size: 5
+      max-size: 20
+      queue-capacity: 100
+      keep-alive-seconds: 60
+
+notification:
+  webhook:
+    timeout: 5000  # Webhook 超时时间（毫秒）
+
+# 加密配置
+encryption:
+  aes-key: ${AES_KEY:change-me-to-a-32-char-random-key}  # 生产环境请通过环境变量设置

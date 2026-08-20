@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.ToolsMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.Tools">
+            <id property="id" column="id" />
+            <result property="ownerId" column="owner_id" />
+            <result property="sourceType" column="source_type" />
+            <result property="toolCodeName" column="tool_code_name" />
+            <result property="displayName" column="display_name" />
+            <result property="description" column="description" />
+            <result property="mcpServerId" column="mcp_server_id" />
+            <result property="inputSchema" column="input_schema" />
+            <result property="outputSchema" column="output_schema" />
+            <result property="customEndpointUrl" column="custom_endpoint_url" />
+            <result property="isEnabled" column="is_enabled" />
+            <result property="isDelete" column="is_delete" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,owner_id,source_type,tool_code_name,display_name,description,
+        mcp_server_id,input_schema,output_schema,custom_endpoint_url,is_enabled,
+        is_delete,created_at,updated_at
+    </sql>
+</mapper>

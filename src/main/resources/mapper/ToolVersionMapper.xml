@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.ToolVersionMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.ToolVersion">
+        <id column="id" property="id"/>
+        <result column="tool_id" property="toolId"/>
+        <result column="version_number" property="versionNumber"/>
+        <result column="version_name" property="versionName"/>
+        <result column="description" property="description"/>
+        <result column="source_type" property="sourceType"/>
+        <result column="input_schema" property="inputSchema" typeHandler="com.esdllm.agentmesh.config.PostgreSqlJsonbTypeHandler"/>
+        <result column="output_schema" property="outputSchema" typeHandler="com.esdllm.agentmesh.config.PostgreSqlJsonbTypeHandler"/>
+        <result column="custom_endpoint_url" property="customEndpointUrl"/>
+        <result column="mcp_server_id" property="mcpServerId"/>
+        <result column="is_active" property="isActive"/>
+        <result column="is_current" property="isCurrent"/>
+        <result column="parent_version_id" property="parentVersionId"/>
+        <result column="change_log" property="changeLog"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <select id="selectByToolId" resultMap="BaseResultMap">
+        SELECT * FROM tool_version
+        WHERE tool_id = #{toolId}
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectActiveVersion" resultMap="BaseResultMap">
+        SELECT * FROM tool_version
+        WHERE tool_id = #{toolId} AND is_active = true
+        LIMIT 1
+    </select>
+
+    <select id="selectCurrentVersion" resultMap="BaseResultMap">
+        SELECT * FROM tool_version
+        WHERE tool_id = #{toolId} AND is_current = true
+        LIMIT 1
+    </select>
+
+    <update id="deactivateAllVersions">
+        UPDATE tool_version
+        SET is_active = false, is_current = false
+        WHERE tool_id = #{toolId}
+    </update>
+
+    <update id="activateVersion">
+        UPDATE tool_version
+        SET is_active = true, is_current = true
+        WHERE id = #{versionId}
+    </update>
+
+</mapper>

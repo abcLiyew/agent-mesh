@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esdllm.agentmesh.repository.mapper.ModelUsageCostMapper">
+
+    <resultMap id="BaseResultMap" type="com.esdllm.agentmesh.model.domain.ModelUsageCost">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="agentId" column="agent_id" />
+        <result property="modelId" column="model_id" />
+        <result property="modelType" column="model_type" />
+        <result property="inputTokens" column="input_tokens" />
+        <result property="outputTokens" column="output_tokens" />
+        <result property="totalTokens" column="total_tokens" />
+        <result property="cost" column="cost" />
+        <result property="currencyType" column="currency_type" />
+        <result property="status" column="status" />
+        <result property="createdAt" column="created_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, agent_id, model_id, model_type, input_tokens, output_tokens,
+        total_tokens, cost, currency_type, status, created_at
+    </sql>
+
+    <!-- 查询用户指定日期范围内的成本统计 -->
+    <select id="getUserCostStats" resultType="java.util.Map">
+        SELECT
+        SUM(cost) as total_cost,
+        COUNT(*) as total_calls,
+        SUM(total_tokens) as total_tokens
+        FROM model_usage_cost
+        WHERE user_id = #{userId}
+        AND created_at >= #{startDate}
+        AND created_at &lt;= #{endDate}
+    </select>
+
+    <!-- 按模型分组统计成本 -->
+    <select id="getCostByModel" resultType="java.util.Map">
+        SELECT
+        am.model_name as model_name,
+        SUM(muc.cost) as cost,
+        SUM(muc.total_tokens) as tokens
+        FROM model_usage_cost muc
+        LEFT JOIN ai_model am ON muc.model_id = am.id
+        WHERE muc.user_id = #{userId}
+        AND muc.created_at >= #{startDate}
+        AND muc.created_at &lt;= #{endDate}
+        GROUP BY am.model_name
+    </select>
+
+    <!-- 按智能体分组统计调用次数 -->
+    <select id="getCallsByAgent" resultType="java.util.Map">
+        SELECT
+        a.name as agent_name,
+        COUNT(*) as calls
+        FROM model_usage_cost muc
+        LEFT JOIN agent a ON muc.agent_id = a.id
+        WHERE muc.user_id = #{userId}
+        AND muc.created_at >= #{startDate}
+        AND muc.created_at &lt;= #{endDate}
+        GROUP BY a.name
+    </select>
+
+    <!-- 查询智能体的成本统计 -->
+    <select id="getAgentCostStats" resultType="java.util.Map">
+        SELECT
+        SUM(cost) as total_cost,
+        COUNT(*) as total_calls,
+        SUM(total_tokens) as total_tokens
+        FROM model_usage_cost
+        WHERE agent_id = #{agentId}
+        AND created_at >= #{startDate}
+        AND created_at &lt;= #{endDate}
+    </select>
+
+    <!-- 查询成本趋势（按天分组） -->
+    <select id="getCostTrend" resultType="java.util.Map">
+        SELECT
+        DATE(created_at) as date,
+        SUM(cost) as cost,
+        COUNT(*) as calls
+        FROM model_usage_cost
+        WHERE user_id = #{userId}
+        AND created_at >= #{startDate}
+        GROUP BY DATE(created_at)
+        ORDER BY date
+    </select>
+
+</mapper>

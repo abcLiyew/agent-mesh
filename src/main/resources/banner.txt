@@ -1,0 +1,23 @@
+${AnsiColor.BRIGHT_CYAN}╔═════════════════════════════════════════════════════════════════╗${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}                                                              ${AnsiColor.BRIGHT_CYAN}   ║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}   ${AnsiColor.BRIGHT_GREEN}██╗ ██████╗ ███╗   ██╗███████╗ ██████╗ ██████╗ ███╗   ██╗ ${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}   ${AnsiColor.BRIGHT_GREEN}██║██╔═══██╗████╗  ██║██╔════╝██╔═══██╗██╔═══██╗████╗  ██║${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}   ${AnsiColor.BRIGHT_GREEN}██║██║   ██║██╔██╗ ██║███████╗██║   ██║██║   ██║██╔██╗ ██║${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}   ${AnsiColor.BRIGHT_GREEN}██║██║   ██║██║╚██╗██║╚════██║██║   ██║██║   ██║██║╚██╗██║${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}   ${AnsiColor.BRIGHT_GREEN}██║╚██████╔╝██║ ╚████║███████║╚██████╔╝╚██████╔╝██║ ╚████║${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}   ${AnsiColor.BRIGHT_GREEN}╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}                                                              ${AnsiColor.BRIGHT_CYAN}   ║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}          ${AnsiColor.BRIGHT_YELLOW}Agent Mesh - AI Agent Decision Engine ${AnsiColor.DEFAULT}                 ${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}                                                              ${AnsiColor.BRIGHT_CYAN}   ║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}╠═════════════════════════════════════════════════════════════════╣${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}                                                              ${AnsiColor.BRIGHT_CYAN}   ║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}   ${AnsiColor.BRIGHT_WHITE}🚀 AI 自主决策     🤖 智能体即工具    🧠 多模型协同${AnsiColor.DEFAULT}               ${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}   ${AnsiColor.BRIGHT_WHITE}📚 RAG 知识库     💰 成本监控        🔗 MCP 服务${AnsiColor.DEFAULT}                ${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}                                                              ${AnsiColor.BRIGHT_CYAN}   ║${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}╠═════════════════════════════════════════════════════════════════╣${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}║${AnsiColor.DEFAULT}                                                              ${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_RED}  Spring Boot: ${AnsiColor.BRIGHT_BLUE}${spring-boot.formatted-version}${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_RED}  Spring AI:   ${AnsiColor.BRIGHT_BLUE}1.1.0${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_RED}  Java:        ${AnsiColor.BRIGHT_BLUE}${java.version}${AnsiColor.DEFAULT}
+${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}╚═════════════════════════════════════════════════════════════════╝${AnsiColor.DEFAULT}

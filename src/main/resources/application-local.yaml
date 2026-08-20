@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: agent-mesh
+# 连接池配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:postgresql:///agent_mesh
+    username: agent_mesh
+    password: ${DB_PASSWORD:your-db-password}
+    driver-class-name: org.postgresql.Driver
+  jackson:
+    generator:
+      write-numbers-as-strings: true

@@ -1,0 +1,38 @@
+spring:
+  ai:
+    vectorstore:
+      pgvector:
+        vectorTableName: vector_store #表名
+        initialize-schema: true #是否初始化表
+        index-type: hnsw #索引类型
+        dimensions-type: dimensions_openai #向量维度
+        distance-type: cosine_distance #距离类型
+        max-document-batch-size: 1000 #最大文档批次大小
+    ollama:
+      base-url: http://localhost:11434
+    dashscope:
+      # Spring AI 阿里云 DashScope 的超时配置
+      read-timeout: 120000
+
+# 工具健康检查配置
+tool:
+  health-check:
+    enabled: true
+    interval-ms: 300000  # 5 分钟检查一次
+    timeout-ms: 5000   # 5 秒超时
+    max-retries: 3     # 最大重试 3 次
+    retry-interval-ms: 2000  # 重试间隔 2 秒
+    failure-threshold: 3     # 连续失败 3 次标记为异常
+    recovery-threshold: 2    # 连续成功 2 次恢复健康
+
+# Ollama 超时配置（单位：毫秒）
+ollama:
+  connect-timeout: 30000   # 连接超时 30 秒
+  read-timeout: 180000     # 读取超时 180 秒（3 分钟）- 大模型响应较慢，需要更长时间
+  write-timeout: 180000    # 写入超时 180 秒
+
+# Spring Boot WebFlux 全局超时配置
+reactor:
+  netty:
+    connection-provider:
+      timeout: 180000
